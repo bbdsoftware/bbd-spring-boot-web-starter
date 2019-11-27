@@ -5,6 +5,7 @@ Sections
 
 1. [Logging](#logging)
 2. [Flags](#feature-flags)
+3. [Config with kubernetes](#configuration)
 
 
 ## Logging
@@ -25,11 +26,12 @@ public class ReferenceApplication {
 #### Usage
 
 Annotating a method will log the entry and exit of method along with arguments
-
+```
 @Loggable(value = LogLevel.INFO, name = "sayHello")
 public String sayHello(String name) {
  
 }
+```
 ### Customisations
 ```
 /**
@@ -127,3 +129,8 @@ curl  -s  http://localhost:8080/describe/features | jq
     "feature": "toggleExamplev2"
   }
 ```
+
+## Configuration
+
+This library bundles in [spring-cloud-kubernetes](https://github.com/spring-cloud/spring-cloud-kubernetes) in order to leverage comfig maps for configuration  
+Please see https://github.com/spring-cloud/spring-cloud-kubernetes#5-kubernetes-propertysource-implementations for further details

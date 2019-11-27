@@ -1,11 +1,25 @@
 
  # Starter libs for spring Based Services
 
+---
+
+**Credits and usages :**
+This library makes use of these create projects
+* https://springfox.github.io/springfox/
+* https://github.com/Feature-Flip/flips
+* https://spring.io/projects/spring-cloud
+* https://spring.io/projects/spring-cloud-kubernetes
+* https://spring.io/projects/spring-restdocs
+
+---
+
+
 Sections
 
 1. [Logging](#logging)
 2. [Flags](#feature-flags)
 3. [Config with kubernetes](#configuration)
+4. [Swagger with springfox ](#swagger)
 
 
 ## Logging
@@ -134,3 +148,30 @@ curl  -s  http://localhost:8080/describe/features | jq
 
 This library bundles in [spring-cloud-kubernetes](https://github.com/spring-cloud/spring-cloud-kubernetes) in order to leverage comfig maps for configuration  
 Please see https://github.com/spring-cloud/spring-cloud-kubernetes#5-kubernetes-propertysource-implementations for further details
+
+## Swagger
+
+#### Enabling
+Annotating the main service class with @EnableBBDSwagger . 
+```
+@SpringBootApplication
+@EnableBBDSwagger
+public class ReferenceApplication {
+ 
+    public static void main(String[] args) {
+        SpringApplication.run(ReferenceApplication.class, args);
+    }
+ 
+}
+```
+
+### Configuration
+The library  will configure the [spring-fox](https://springfox.github.io/springfox/) library to scan for @RestControllers for documentation in the configured packages 
+The swagger ui can be reached at /swagger-ui.html
+
+```
+bbd:
+  core:
+    swagger:
+      packages: com.bbdsoftware
+```

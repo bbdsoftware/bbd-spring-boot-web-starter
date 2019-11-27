@@ -25,8 +25,8 @@ Sections
 ## Logging
 
 #### Enabling
-Annotating the main service class with @EnableLogger
-```
+Annotating the main service class with `@EnableLogger`
+```java
 @SpringBootApplication
 @EnableLogger
 public class ReferenceApplication {
@@ -40,14 +40,14 @@ public class ReferenceApplication {
 #### Usage
 
 Annotating a method will log the entry and exit of method along with arguments
-```
+```java
 @Loggable(value = LogLevel.INFO, name = "sayHello")
 public String sayHello(String name) {
  
 }
 ```
 ### Customisations
-```
+```java
 /**
  * The log level {@link LogLevel}. (default: INFO)
  */
@@ -93,11 +93,11 @@ TimeUnit warnUnit() default TimeUnit.MINUTES;
 This lib leverages https://github.com/Feature-Flip/flips for feature flipping
 
 #### Enabling Support
-In order to enable support please annotate the service class with  @EnableBayportFlipToggles
+In order to enable support please annotate the service class with `@EnableBBDFlipToggles`
 
-```
+```java
 @SpringBootApplication
-EnableBBDFlipToggles
+@EnableBBDFlipToggles
 @EnableLogger
 public class ReferenceApplication {
 
@@ -112,7 +112,7 @@ public class ReferenceApplication {
 
 Method Annotation using a property switch from config 
 
-```
+```java
     @FlipOnEnvironmentProperty(property = "service.feature.example", expectedValue = "true")
     public RestApiResult<String> toggleExamplev2(@PathVariable("user") final String user) throws Exception {
         return new RestApiResult<String>().withResult(demoService.getReposForUserMethod(user));
@@ -133,13 +133,13 @@ For Other annotations see https://github.com/Feature-Flip/flips
 
 #### Example usage 
 
-A automatic controller will be available allowing you to issue get request to find the state of features. The path is /describe/ 
-```
+A automatic controller will be available allowing you to issue get request to find the state of features. The path is `/describe/ `
+```sh
 curl  -s  http://localhost:8080/describe/features | jq
 [
   {
     "enabled": false,
-    "class": "com.bayport.service.reference.api.SampleApi",
+    "class": "com.bbdsoftware.service.reference.api.SampleApi",
     "feature": "toggleExamplev2"
   }
 ```
@@ -153,7 +153,7 @@ Please see https://github.com/spring-cloud/spring-cloud-kubernetes#5-kubernetes-
 
 #### Enabling
 Annotating the main service class with @EnableBBDSwagger . 
-```
+```java
 @SpringBootApplication
 @EnableBBDSwagger
 public class ReferenceApplication {
@@ -166,10 +166,10 @@ public class ReferenceApplication {
 ```
 
 ### Configuration
-The library  will configure the [spring-fox](https://springfox.github.io/springfox/) library to scan for @RestControllers for documentation in the configured packages 
-The swagger ui can be reached at /swagger-ui.html
+The library  will configure the [spring-fox](https://springfox.github.io/springfox/) library to scan for `@RestControllers` for documentation in the configured packages 
+The swagger ui can be reached at `/swagger-ui.html`
 
-```
+```yaml
 bbd:
   core:
     swagger:

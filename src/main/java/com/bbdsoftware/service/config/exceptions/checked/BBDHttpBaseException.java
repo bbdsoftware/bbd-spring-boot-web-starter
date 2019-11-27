@@ -12,32 +12,19 @@ public abstract class BBDHttpBaseException extends Exception {
     protected List<ResultMessage> messages = new ArrayList<>();
     protected HttpStatus httpStatus;
 
-
-
-    public BBDHttpBaseException(
-            List<ResultMessage> messages,
-            HttpStatus httpStatus) {
+    public BBDHttpBaseException(List<ResultMessage> messages, HttpStatus httpStatus) {
         super("Exception Occurred ");
         this.httpStatus = httpStatus;
         this.messages = messages;
-
-
     }
 
-    public BBDHttpBaseException(
-            List<ResultMessage> messages,
-            HttpStatus httpStatus,
-            Throwable e) {
+    public BBDHttpBaseException(List<ResultMessage> messages, HttpStatus httpStatus, Throwable e) {
         super("Exception Occurred ");
         this.httpStatus = httpStatus;
         this.messages.addAll(messages);
-
     }
 
-    public BBDHttpBaseException(
-            String message,
-            HttpStatus httpStatus,
-            Throwable e) {
+    public BBDHttpBaseException(String message, HttpStatus httpStatus, Throwable e) {
         super("Exception Occurred ", e);
         this.httpStatus = httpStatus;
         this.messages.add(
@@ -46,13 +33,9 @@ public abstract class BBDHttpBaseException extends Exception {
                         .messageSeverity(MessageSeverity.ERROR)
                         .build()
         );
-
     }
 
-    public BBDHttpBaseException(
-            String message,
-            HttpStatus httpStatus
-            ) {
+    public BBDHttpBaseException(String message, HttpStatus httpStatus) {
         super("Exception Occurred ");
         this.httpStatus = httpStatus;
         this.messages.add(
@@ -61,7 +44,6 @@ public abstract class BBDHttpBaseException extends Exception {
                         .messageSeverity(MessageSeverity.ERROR)
                         .build()
         );
-
     }
 
     public HttpStatus getHttpStatus() {
@@ -76,5 +58,4 @@ public abstract class BBDHttpBaseException extends Exception {
     public String getMessage() {
         return super.getMessage();
     }
-
 }

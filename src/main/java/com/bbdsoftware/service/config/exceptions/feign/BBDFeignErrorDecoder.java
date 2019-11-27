@@ -30,21 +30,17 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
 
 
         return Stream.of(
-                DecodeToBBDBBDHttpAuthException(methodKey, response)
-                , DecodeToBBDHttpAuthExceptionException(methodKey, response)
-                , DecodeToBBDHttpTechnicalException(methodKey, response)
-                , DecodeToBBDHttpBusinessException(methodKey, response)
-                , DecodeToBBDHttpServiceException(methodKey, response))
+                    DecodeToBBDBBDHttpAuthException(methodKey, response),
+                    DecodeToBBDHttpAuthExceptionException(methodKey, response),
+                    DecodeToBBDHttpTechnicalException(methodKey, response),
+                    DecodeToBBDHttpBusinessException(methodKey, response),
+                    DecodeToBBDHttpServiceException(methodKey, response))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .findFirst().orElse(errorStatus(methodKey, response));
-
-
     }
 
-    public Optional<Exception> DecodeToBBDHttpAuthExceptionException(
-            String methodKey,
-            Response response) {
+    public Optional<Exception> DecodeToBBDHttpAuthExceptionException(String methodKey, Response response) {
         if (response.status() == 401) {
 
             Result<Void> result = getResultFromResponse(response, methodKey);
@@ -57,9 +53,7 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
     }
 
 
-    public Optional<Exception> DecodeToBBDBBDHttpAuthException(
-            String methodKey,
-            Response response) {
+    public Optional<Exception> DecodeToBBDBBDHttpAuthException(String methodKey, Response response) {
         if (response.status() == 401) {
 
             Result<Void> result = getResultFromResponse(response, methodKey);
@@ -73,9 +67,7 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
         return Optional.empty();
     }
 
-    public Optional<Exception> DecodeToBBDHttpTechnicalException(
-            String methodKey,
-            Response response) {
+    public Optional<Exception> DecodeToBBDHttpTechnicalException(String methodKey, Response response) {
         if (response.status() == 400) {
 
             Result<Void> result = getResultFromResponse(response, methodKey);
@@ -86,9 +78,7 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
         return Optional.empty();
     }
 
-    public Optional<Exception> DecodeToBBDHttpBusinessException(
-            String methodKey,
-            Response response) {
+    public Optional<Exception> DecodeToBBDHttpBusinessException(String methodKey, Response response) {
 
         if (response.status() > 400 && response.status() <= 499) {
 
@@ -103,9 +93,7 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
 
     }
 
-    public Optional<Exception> DecodeToBBDHttpServiceException(
-            String methodKey,
-            Response response) {
+    public Optional<Exception> DecodeToBBDHttpServiceException(String methodKey, Response response) {
 
         if (response.status() >= 500 && response.status() <= 599) {
 
@@ -121,9 +109,7 @@ public class BBDFeignErrorDecoder implements feign.codec.ErrorDecoder {
 
     }
 
-    private Result<Void> getResultFromResponse(
-            Response response,
-            String methodKey) {
+    private Result<Void> getResultFromResponse(Response response, String methodKey) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 

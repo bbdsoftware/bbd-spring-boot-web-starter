@@ -4,9 +4,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
 
 
-/**
- * Created by kanzi on 12/07/17.
- */
 @Configuration
 @PropertySource("classpath:org/flips/application.properties")
 @ComponentScan(value = "org.flips", excludeFilters = @ComponentScan.Filter(

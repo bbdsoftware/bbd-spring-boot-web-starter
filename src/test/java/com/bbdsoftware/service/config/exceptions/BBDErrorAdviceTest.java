@@ -262,7 +262,7 @@ public class BBDErrorAdviceTest {
         };
 
         mockMvc.perform(request)
-                .andExpect(errorResult(501, "method", "WARNING"));
+                .andExpect(errorResult(501, "Feature Disabled : method", "WARNING"));
     }
 
     @Test

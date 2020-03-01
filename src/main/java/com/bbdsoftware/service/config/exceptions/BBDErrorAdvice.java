@@ -181,7 +181,7 @@ public class BBDErrorAdvice {
     public ResponseEntity<Result<Void>> defaultFeatureNotEnabledExceptionHandler(FeatureNotEnabledException e) {
         log.error("Exception Occurred ", e);
         Result<Void> result = new RestApiResult<Void>()
-                .withMessage(e.getFeature().getFeatureName(), MessageSeverity.WARNING);
+                .withMessage("Feature Disabled : " + e.getFeature().getFeatureName(), MessageSeverity.WARNING);
         return new ResponseEntity<>(result, HttpStatus.NOT_IMPLEMENTED);
     }
 
